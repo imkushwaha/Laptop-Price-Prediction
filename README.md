@@ -35,6 +35,7 @@ https://laptoppricepredictor.herokuapp.com/  at Heroku
 
 ![l1](https://user-images.githubusercontent.com/72372136/129600392-b0df8216-4306-47fc-90ee-6044b781f294.JPG)
 
+
 ![l2](https://user-images.githubusercontent.com/72372136/129600587-c95798bd-d6ff-44a5-9809-d1d539537f4a.JPG)
 
 
