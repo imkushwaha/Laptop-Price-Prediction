@@ -4,19 +4,22 @@ import pandas as pd
 import numpy as np
 import warnings
 warnings.filterwarnings("ignore")
+import pickle
 from datetime import datetime
 from preprocessing import data_processing
 from train_test import splitData
 from modelTraining import ModelTrainig
 
 #path of directory where training data is stored
-path = "G:\Deployment\Laptop Price Prediction\Code\laptop_data.csv"
+path = open('trainingDataPath.txt', "r")
 
 #reading data and storing it to df object
-df = pd.read_csv(path)
+df = pd.read_csv(path.read())
 
 #Making object of data_processing class
 df_preprocess = data_processing(df)
+
+print("Data Preprocessing Started....")
 
 #storing processed data into object processed_data
 processed_data = df_preprocess.start_preprocessing()
@@ -130,10 +133,88 @@ score_dict = {}
 for model in models:
     score = round(float(metrics_dict[model][0].split(":")[1]),3)
     score_dict[model]= score
+
+
+bestModel = max(score_dict)
+
+def callingBestModel(bestModel):
     
-print(max(score_dict))
+    """[THIS FUNCTION IS TO RETURN BEST MODEL]
+    
+    Parameters:
+        [bestModel]: [bestmodel object, which contain best model according to R2 score(max)]
+    Returns:
+        [MODEL]: [BEST MODEL ACCORDING TO R2 SCORE]
+    """
+    if bestModel=='Linear':
+       model = Model_lin
+       return model
+   
+    elif bestModel == 'Ridge':
+        model = Model_Ridge
+        return model
+    
+    elif bestModel == 'Lasso':
+        model = Model_Lasso
+        return model
+    
+    elif bestModel == 'KNN':
+        model = Model_KNN
+        return model
+    
+    elif bestModel == 'DecisionTree':
+        model = Model_DT
+        return model
+    
+    elif bestModel == 'SVM':
+        model = Model_SVM
+        return model
+    
+    elif bestModel == 'RandomForest':
+        model = Model_RF
+        return model
+        
+    elif bestModel == 'ExtraTree':
+        model = Model_ET
+        return model   
+    
+    elif bestModel == 'AdaBoost':
+        model = Model_Ada
+        return model   
+    
+    elif bestModel == 'GradientBoost':
+        model = Model_GB
+        return model   
+    
+    elif bestModel == 'XgBoost':
+        model = Model_Xg
+        return model   
+    
+    elif bestModel == 'Voting':
+        model = Model_Vote
+        return model   
+    
+    else:
+        model = Model_Stack
+        return model   
+    
+#calling best model function to return best model (maximum R2 score)
+bestModel = callingBestModel(bestModel=bestModel)      
 
 
 
-print(f"Code executed successfully, Fianl data saved at: {path}\n")
+## Exporting the model and final data
 
+def exportModel():
+    pickle.dump(final_data,open('final_data.pkl','wb'))
+    pickle.dump(bestModel,open('bestModel.pkl','wb'))
+
+#calling exportModel
+exportModel()
+
+print("Model and final data successfully exported and saved in current working directory")
+
+
+print("\t\t\t*****Complete Pipeline Code Executed Successfully*****")
+
+#This is the end of pipeline.......!!

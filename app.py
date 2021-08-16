@@ -2,12 +2,21 @@
 import streamlit as st
 import pickle
 import numpy as np
+from PIL import Image
 
 # import the model
 pipe = pickle.load(open('pipe.pkl','rb'))
 df = pickle.load(open('df.pkl','rb'))
 
-st.title("Laptop Predictor")
+st.title("Laptop Price")
+#image = Image.open('image.jpg')
+#st.image(image,  width = 700)
+html_temp = """
+<div style="background-color:DarkSlateGray;padding:10px">
+<h2 style="color:white;text-align:center;">Streamlit Laptop Price Prediction ML App </h2>
+</div>
+"""
+st.markdown(html_temp,unsafe_allow_html=True)
 
 # brand
 company = st.selectbox('Brand',df['Company'].unique())
@@ -42,7 +51,7 @@ ssd = st.selectbox('SSD(in GB)',[0,8,128,256,512,1024])
 
 gpu = st.selectbox('GPU',df['Gpu brand'].unique())
 
-os = st.selectbox('OS',df['os'].unique())
+os = st.selectbox('OS',df['Os'].unique())
 
 if st.button('Predict Price'):
     # query
@@ -63,4 +72,18 @@ if st.button('Predict Price'):
     query = np.array([company,type,ram,weight,touchscreen,ips,ppi,cpu,hdd,ssd,gpu,os])
 
     query = query.reshape(1,12)
-    st.title("The predicted price of this configuration is " + str(int(np.exp(pipe.predict(query)[0]))))
+    st.success("The predicted price of this configuration is " + str(int(np.exp(pipe.predict(query)[0]))))
+    
+    
+if st.button("About ML App"):
+    st.text("Regression model to predict the laptop price based on the different features in the training data")
+    st.text("Built with Streamlit")
+    
+                      
+               
+               
+if st.button("About Author"):
+    st.text("Name : Upendra Kumar") 
+    st.text("Email : upendra.kumar48762@gmail.com") 
+    st.text("Oragnization : Data Science Intern at ineuron.ai")                
+               
