@@ -1,1 +1,0 @@
-G:\Deployment\Laptop Price Prediction\Code\laptop_data.csv
