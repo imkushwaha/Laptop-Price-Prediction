@@ -33,4 +33,4 @@ https://laptoppricepredictor.herokuapp.com/  at Heroku
   
 ## Screenshots
 
-![Alt text](/relative/path/to/l1.jpg?raw=true "Optional Title")
+![Screenshot](l1.jpeg)
