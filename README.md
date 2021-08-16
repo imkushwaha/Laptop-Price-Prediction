@@ -33,4 +33,4 @@ https://laptoppricepredictor.herokuapp.com/  at Heroku
   
 ## Screenshots
 
-![Screenshot](l1.jpeg)
+![l1](https://user-images.githubusercontent.com/72372136/129600392-b0df8216-4306-47fc-90ee-6044b781f294.JPG)
